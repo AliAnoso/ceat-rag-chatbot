@@ -1,7 +1,8 @@
 import streamlit as st
 import os
 from langchain_community.document_loaders import DirectoryLoader, PyMuPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Qdrant
 from langchain.prompts import ChatPromptTemplate
@@ -9,6 +10,8 @@ from langchain.schema import StrOutputParser
 from operator import itemgetter
 from langchain.retrievers.multi_query import MultiQueryRetriever
 import time
+from functools import wraps
+import logging
 
 # Page configuration
 st.set_page_config(
@@ -290,3 +293,53 @@ st.markdown("""
     <p>⚠️ This is an AI assistant. For official transactions, please contact the office directly.</p>
 </div>
 """, unsafe_allow_html=True)
+
+def rate_limit(max_calls=10, time_frame=60):
+    calls = []
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            now = time.time()
+            calls[:] = [c for c in calls if c > now - time_frame]
+            if len(calls) >= max_calls:
+                st.warning("Rate limit exceeded. Please wait.")
+                return None
+            calls.append(now)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@rate_limit(max_calls=20, time_frame=60)
+def generate_response(query):
+    # Your response generation code
+    pass
+
+def validate_input(user_input):
+    if len(user_input) > 500:
+        return False, "Question too long (max 500 characters)"
+    if not user_input.strip():
+        return False, "Please enter a question"
+    return True, ""
+
+if 'query_count' not in st.session_state:
+    st.session_state.query_count = 0
+
+st.session_state.query_count += 1
+
+# Display in sidebar
+st.sidebar.metric("Total Queries", st.session_state.query_count)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('chatbot.log'),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
+
+# Log user queries
+logger.info(f"User query: {user_input}")
+logger.info(f"Response time: {response_time}s")
