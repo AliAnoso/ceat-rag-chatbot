@@ -365,14 +365,13 @@ This software is developed for the College of Engineering and Agro-Industrial Te
 ## 👥 Credits
 
 **Developer:** Alyssa Mila Marie F. Añoso  
-**Thesis Adviser:** [Adviser Name]  
+**Thesis Adviser:** Engr. JF Chan
 **Institution:** College of Engineering and Agro-Industrial Technology (CEAT), UPLB  
-**Academic Year:** 2024-2025
+**Academic Year:** 2025-2026
 
 **Special Thanks:**
 - CEAT Office of the College Secretary staff
 - Student testers and survey participants
-- UPLB Computer Science Department
 
 ---
 
@@ -382,7 +381,7 @@ This software is developed for the College of Engineering and Agro-Industrial Te
 
 **Technical Issues:**
 - GitHub Issues: [github.com/your-org/ceat-ocs-rag-chatbot/issues](https://github.com/your-org/ceat-ocs-rag-chatbot/issues)
-- Email: [developer email]
+- Email: afanoso@up.edu.ph
 
 **Deployment Questions:**
 - Contact CEAT-OCS: ceat_ocs@uplb.edu.ph
@@ -390,10 +389,6 @@ This software is developed for the College of Engineering and Agro-Industrial Te
 
 ### For Future Developers
 
-**Documentation:**
-- Architecture details: `docs/ARCHITECTURE.md`
-- Testing guide: `docs/TESTING.md`
-- Deployment guide: `docs/DEPLOYMENT.md`
 
 **Getting Started:**
 1. Read this README thoroughly
@@ -425,12 +420,6 @@ This software is developed for the College of Engineering and Agro-Industrial Te
 ---
 
 ## 📚 References & Further Reading
-
-### Academic Papers
-
-- **RAG Fundamentals:** Lewis et al. (2020). "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." *NeurIPS 2020.*
-- **LLM Evaluation:** Zheng et al. (2023). "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena." *NeurIPS 2023.*
-- **Vector Search:** Johnson et al. (2019). "Billion-scale similarity search with GPUs." *IEEE Transactions on Big Data.*
 
 ### Documentation
 
